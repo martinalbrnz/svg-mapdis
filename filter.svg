@@ -2,17 +2,17 @@
 	<rect width="540" height="200" fill="url(#paint0_linear_321_14)" />
 	<defs>
 		<linearGradient id="paint0_linear_321_14" x1="0" y1="100" x2="540" y2="100" gradientUnits="userSpaceOnUse">
-			<stop offset="0" stop-color="#7F7f7F" />
-			<stop offset="0.1" stop-color="#7F587F" />
-			<stop offset="0.2" stop-color="#7F347F" />
-			<stop offset="0.3" stop-color="#7F187F" />
-			<stop offset="0.4" stop-color="#7F067F" />
-			<stop offset="0.5" stop-color="#7F007F" />
-			<stop offset="0.6" stop-color="#7F067F" />
-			<stop offset="0.7" stop-color="#7F187F" />
-			<stop offset="0.8" stop-color="#7F347F" />
-			<stop offset="0.9" stop-color="#7F587F" />
-			<stop offset="1" stop-color="#7F7f7F" />
+			<stop offset="0.00" stop-color="#073f7F" />
+			<stop offset="0.10" stop-color="#012c7F" />
+			<stop offset="0.20" stop-color="#071a7F" />
+			<stop offset="0.30" stop-color="#190c7F" />
+			<stop offset="0.40" stop-color="#35037F" />
+			<stop offset="0.50" stop-color="#58007F" />
+			<stop offset="0.60" stop-color="#7f037F" />
+			<stop offset="0.70" stop-color="#a60c7F" />
+			<stop offset="0.80" stop-color="#c91a7F" />
+			<stop offset="0.90" stop-color="#e52c7F" />
+			<stop offset="1.00" stop-color="#f73f7F" />
 		</linearGradient>
 	</defs>
 </svg>
