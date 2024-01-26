@@ -5,10 +5,72 @@ window.onload = function () {
   var filterImage = document.getElementById("filterImage");
   var image1 = document.getElementById("image1");
   var image2 = document.getElementById("image2");
-  var image3 = document.getElementById("image3");
 
-  scalevalue.innerHTML = scaleInput.value;
-  filterImage.href = "filter.svg";
+  var productimg = document.getElementById("productimg");
+  var imgsrc = document.getElementById("imgsrc");
+  var setimgsrc = document.getElementById("setimgsrc");
+
+  var previewcontainer = document.getElementById("previewcontainer");
+  var appliedFilter = document.getElementById("appliedFilter");
+
+  var INCH = 2.54;
+  var DPI = 72;
+  var widthImageCentimeter = document.getElementById("widthImageCentimeter");
+  var heightImageCentimeter = document.getElementById("heightImageCentimeter");
+  var positionAreaAvailableCentimeterAxisX = document.getElementById(
+    "positionAreaAvailableCentimeterAxisX"
+  );
+  var positionAreaAvailableCentimeterAxisY = document.getElementById(
+    "positionAreaAvailableCentimeterAxisY"
+  );
+  var widthAreaAvailableInCentimeter = document.getElementById(
+    "widthAreaAvailableInCentimeter"
+  );
+  var heightAreaAvailableInCentimeter = document.getElementById(
+    "heightAreaAvailableInCentimeter"
+  );
+
+  function updateLogoPosition() {
+    const imgNaturalWidth = productimg.naturalWidth;
+    const imgNaturalHeight = productimg.naturalHeight;
+    const previewSize = previewcontainer.getBoundingClientRect();
+
+    const offsetX = positionAreaAvailableCentimeterAxisX.value;
+    const offsetY = positionAreaAvailableCentimeterAxisY.value;
+    const areaWidth = widthAreaAvailableInCentimeter.value;
+    const areaHeight = heightAreaAvailableInCentimeter.value;
+    const INCH_DPI = INCH / DPI;
+
+    const left = Math.round(
+      (offsetX / INCH_DPI / imgNaturalWidth) * previewSize.width
+    );
+
+    const top = Math.round(
+      (offsetY / INCH_DPI / imgNaturalHeight) * previewSize.height
+    );
+
+    console.log("top: ", top);
+
+    const width =
+      (Number(areaWidth) / INCH_DPI / imgNaturalWidth) * previewSize.width;
+
+    const height =
+      (areaHeight * previewSize.height) / heightImageCentimeter.value;
+
+    appliedFilter.setAttribute(
+      "style",
+      `left:${left.toFixed(2)}px;top:${top.toFixed(2)}px;width:${width.toFixed(
+        2
+      )}px;height:${height.toFixed(2)}px;`
+    );
+  }
+
+  widthImageCentimeter.oninput = updateLogoPosition;
+  heightImageCentimeter.oninput = updateLogoPosition;
+  positionAreaAvailableCentimeterAxisX.oninput = updateLogoPosition;
+  positionAreaAvailableCentimeterAxisY.oninput = updateLogoPosition;
+  widthAreaAvailableInCentimeter.oninput = updateLogoPosition;
+  heightAreaAvailableInCentimeter.oninput = updateLogoPosition;
 
   scaleInput.oninput = function () {
     displacementScale.scale.baseVal = scaleInput.value;
@@ -23,49 +85,13 @@ window.onload = function () {
     filterImage.setAttribute("href", "filter2.svg");
   };
 
-  function calculateDegrade() {
-    const MIN_VALUE = 128 - 64;
-    const MAX_VALUE = 255 - 64;
+  setimgsrc.onclick = function () {
+    productimg.setAttribute("src", imgsrc.value);
+    imgsrc.value = "";
+  };
 
-    console.log(
-      "uppercurve\n",
-      new Array(11)
-        .fill(1)
-        .map((item, index) => {
-          const valueH = Math.round(
-            Math.cos((11 - index) * 0.1 * Math.PI) * 126 + 127
-          ).toString(16);
+  scalevalue.innerHTML = scaleInput.value;
+  filterImage.href = "filter.svg";
 
-          const value = Math.round(
-            Math.sin(index * 0.1 * Math.PI) * MAX_VALUE + MIN_VALUE
-          ).toString(16);
-
-          return `<stop offset="${(index * 0.1).toFixed(2)}" stop-color="#${
-            valueH.length === 1 ? "0" + valueH : valueH
-          }${value.length === 1 ? "0" + value : value}7F" />`;
-        })
-        .join("\n")
-    );
-    console.log(
-      "downcurve\n",
-      new Array(11)
-        .fill(1)
-        .map((item, index) => {
-          const valueH = Math.round(
-            Math.cos((11 - index) * 0.1 * Math.PI) * 126 + 127
-          ).toString(16);
-
-          const value = Math.round(
-            -Math.sin(index * 0.1 * Math.PI) * (MIN_VALUE - 1) + (MIN_VALUE - 1)
-          ).toString(16);
-
-          return `<stop offset="${(index * 0.1).toFixed(2)}" stop-color="#${
-            valueH.length === 1 ? "0" + valueH : valueH
-          }${value.length === 1 ? "0" + value : value}7F" />`;
-        })
-        .join("\n")
-    );
-  }
-
-  calculateDegrade();
+  updateLogoPosition();
 };

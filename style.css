@@ -1,9 +1,37 @@
-.buttonContainer {
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	min-width: 0px;
+}
+
+#previewcontainer {
+	position: relative;
+	width: fit-content;
+}
+
+#appliedFilter {
+	position: absolute;
+	outline: 1px solid red;
+}
+
+.actionsContainer {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
 
-.buttonContainer button {
+.actionsContainer button {
 	padding: 1rem;
+}
+
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 4px 8px;
+}
+
+input {
+	padding: 4px;
 }
