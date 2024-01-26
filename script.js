@@ -1,32 +1,31 @@
 window.onload = function () {
-  var scaleInput = document.getElementById("scale");
-  var scalevalue = document.getElementById("value");
-  var displacementScale = document.getElementById("displacement");
-  var filterImage = document.getElementById("filterImage");
-  var image1 = document.getElementById("image1");
-  var image2 = document.getElementById("image2");
+  const scaleInput = document.getElementById("scale");
+  const scalevalue = document.getElementById("value");
+  const displacementScale = document.getElementById("displacement");
+  const filterImage = document.getElementById("filterImage");
+  const image1 = document.getElementById("image1");
+  const image2 = document.getElementById("image2");
 
-  var productimg = document.getElementById("productimg");
-  var imgsrc = document.getElementById("imgsrc");
-  var setimgsrc = document.getElementById("setimgsrc");
+  const productimg = document.getElementById("productimg");
+  const imgsrc = document.getElementById("imgsrc");
+  const setimgsrc = document.getElementById("setimgsrc");
 
-  var previewcontainer = document.getElementById("previewcontainer");
-  var appliedFilter = document.getElementById("appliedFilter");
+  const previewcontainer = document.getElementById("previewcontainer");
+  const appliedFilter = document.getElementById("appliedFilter");
 
-  var INCH = 2.54;
-  var DPI = 72;
-  var widthImageCentimeter = document.getElementById("widthImageCentimeter");
-  var heightImageCentimeter = document.getElementById("heightImageCentimeter");
-  var positionAreaAvailableCentimeterAxisX = document.getElementById(
+  const INCH = 2.54;
+  const DPI = 72;
+
+  const positionAreaAvailableCentimeterAxisX = document.getElementById(
     "positionAreaAvailableCentimeterAxisX"
   );
-  var positionAreaAvailableCentimeterAxisY = document.getElementById(
+  const positionAreaAvailableCentimeterAxisY = document.getElementById(
     "positionAreaAvailableCentimeterAxisY"
   );
-  var widthAreaAvailableInCentimeter = document.getElementById(
+  const widthAreaAvailableInCentimeter = document.getElementById(
     "widthAreaAvailableInCentimeter"
   );
-  var heightAreaAvailableInCentimeter = document.getElementById(
+  const heightAreaAvailableInCentimeter = document.getElementById(
     "heightAreaAvailableInCentimeter"
   );
 
@@ -55,7 +54,7 @@ window.onload = function () {
       (Number(areaWidth) / INCH_DPI / imgNaturalWidth) * previewSize.width;
 
     const height =
-      (areaHeight * previewSize.height) / heightImageCentimeter.value;
+      (Number(areaHeight) / INCH_DPI / imgNaturalHeight) * previewSize.height;
 
     appliedFilter.setAttribute(
       "style",
@@ -65,8 +64,6 @@ window.onload = function () {
     );
   }
 
-  widthImageCentimeter.oninput = updateLogoPosition;
-  heightImageCentimeter.oninput = updateLogoPosition;
   positionAreaAvailableCentimeterAxisX.oninput = updateLogoPosition;
   positionAreaAvailableCentimeterAxisY.oninput = updateLogoPosition;
   widthAreaAvailableInCentimeter.oninput = updateLogoPosition;
