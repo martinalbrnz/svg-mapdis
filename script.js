@@ -63,34 +63,11 @@ window.onload = function () {
     );
 
     svgWithAppliedFilter.setAttribute("style", "z-index:999999");
-    // svgWithAppliedFilter.setAttribute("viewBox", `0 0 ${height} ${width}`);
     svgWithAppliedFilter.setAttribute("width", width.toFixed(0));
     svgWithAppliedFilter.setAttribute("height", height.toFixed(0));
 
     filterImage.setAttribute("width", width);
     filterImage.setAttribute("height", height);
-
-    console.log({ height, width });
-  }
-
-  function scaleFilterImage(customimg) {
-    // const img = new Image();
-    var canvas = document.createElement("canvas");
-    canvas.height = customimg.height;
-    canvas.width = customimg.width;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(canvas, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/svg");
-    console.log(dataURL);
-  }
-
-  function convertSvgToB64() {
-    const svg = document.getElementById("customimg");
-    const stringSvg = new XMLSerializer().serializeToString(svg);
-    console.log("string: ", stringSvg);
-    const encodedSvg = window.btoa(stringSvg);
-    console.log("b64: ", encodedSvg);
   }
 
   scaleInput.oninput = function () {
@@ -112,7 +89,6 @@ window.onload = function () {
   };
 
   (function initialLoad() {
-    console.log("initializing");
     positionAreaAvailableCentimeterAxisX.oninput = updateLogoPosition;
     positionAreaAvailableCentimeterAxisY.oninput = updateLogoPosition;
     widthAreaAvailableInCentimeter.oninput = updateLogoPosition;

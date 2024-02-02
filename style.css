@@ -3,6 +3,19 @@
 	padding: 0;
 	margin: 0;
 	min-width: 0px;
+	font-family: "Maven Pro", sans-serif;
+	font-optical-sizing: auto;
+}
+
+:root {
+	--main-color: #008080;
+}
+
+.app-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
 }
 
 #previewcontainer {
@@ -10,29 +23,72 @@
 	width: fit-content;
 }
 
+#productimg {
+	outline: 1px solid #23232323;
+	max-height: 500px;
+	width: 100%;
+}
+
 #appliedFilter {
 	position: absolute;
-	outline: 1px solid red;
+	outline: 1px solid #6666;
 	overflow: hidden;
+}
+
+.controls-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 2rem 1rem;
+	width: 100vw;
+}
+
+.range-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
 }
 
 .actionsContainer {
 	display: flex;
-	align-items: center;
-	justify-content: space-around;
-}
-
-.actionsContainer button {
-	padding: 1rem;
-}
-
-.inputContainer {
-	display: flex;
 	flex-direction: column;
-	gap: 2px;
-	padding: 4px 8px;
+	gap: .5rem;
+	align-items: stretch;
+	justify-content: space-between;
+}
+
+button {
+	padding: .5rem;
+	border: 1px solid var(--main-color);
+	background-color: white;
+	color: var(--main-color);
+	font-weight: 600;
+	border-radius: 4px;
 }
 
 input {
+	border: 1px solid var(--main-color);
 	padding: 4px;
+	width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.app-container {
+		flex-direction: row;
+		justify-content: stretch;
+		align-items: center;
+	}
+
+	.section-container {
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
+		justify-content: center;
+	}
+
+	.controls-container {
+		max-width: 600px;
+	}
 }
