@@ -12,6 +12,7 @@ window.onload = function () {
 
   const previewcontainer = document.getElementById("previewcontainer");
   const appliedFilter = document.getElementById("appliedFilter");
+  const svgWithAppliedFilter = document.getElementById("svgWithAppliedFilter");
 
   const INCH = 2.54;
   const DPI = 72;
@@ -48,8 +49,6 @@ window.onload = function () {
       (offsetY / INCH_DPI / imgNaturalHeight) * previewSize.height
     );
 
-    console.log("top: ", top);
-
     const width =
       (Number(areaWidth) / INCH_DPI / imgNaturalWidth) * previewSize.width;
 
@@ -62,12 +61,37 @@ window.onload = function () {
         2
       )}px;height:${height.toFixed(2)}px;`
     );
+
+    svgWithAppliedFilter.setAttribute("style", "z-index:999999");
+    // svgWithAppliedFilter.setAttribute("viewBox", `0 0 ${height} ${width}`);
+    svgWithAppliedFilter.setAttribute("width", width.toFixed(0));
+    svgWithAppliedFilter.setAttribute("height", height.toFixed(0));
+
+    filterImage.setAttribute("width", width);
+    filterImage.setAttribute("height", height);
+
+    console.log({ height, width });
   }
 
-  positionAreaAvailableCentimeterAxisX.oninput = updateLogoPosition;
-  positionAreaAvailableCentimeterAxisY.oninput = updateLogoPosition;
-  widthAreaAvailableInCentimeter.oninput = updateLogoPosition;
-  heightAreaAvailableInCentimeter.oninput = updateLogoPosition;
+  function scaleFilterImage(customimg) {
+    // const img = new Image();
+    var canvas = document.createElement("canvas");
+    canvas.height = customimg.height;
+    canvas.width = customimg.width;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(canvas, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/svg");
+    console.log(dataURL);
+  }
+
+  function convertSvgToB64() {
+    const svg = document.getElementById("customimg");
+    const stringSvg = new XMLSerializer().serializeToString(svg);
+    console.log("string: ", stringSvg);
+    const encodedSvg = window.btoa(stringSvg);
+    console.log("b64: ", encodedSvg);
+  }
 
   scaleInput.oninput = function () {
     displacementScale.scale.baseVal = scaleInput.value;
@@ -87,8 +111,15 @@ window.onload = function () {
     imgsrc.value = "";
   };
 
-  scalevalue.innerHTML = scaleInput.value;
-  filterImage.href = "filter.svg";
-
-  updateLogoPosition();
+  (function initialLoad() {
+    console.log("initializing");
+    positionAreaAvailableCentimeterAxisX.oninput = updateLogoPosition;
+    positionAreaAvailableCentimeterAxisY.oninput = updateLogoPosition;
+    widthAreaAvailableInCentimeter.oninput = updateLogoPosition;
+    heightAreaAvailableInCentimeter.oninput = updateLogoPosition;
+    scalevalue.innerHTML = scaleInput.value;
+    displacementScale.scale.baseVal = scaleInput.value;
+    filterImage.href = "filter.svg";
+    updateLogoPosition();
+  })();
 };
